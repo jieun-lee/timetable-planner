@@ -6,6 +6,9 @@ $timetable-border-radius: 8px;
   width: 70vw;
   height: 70vh;
   display: flex;
+  position: absolute;
+  top: 15vh;
+  left: 15vh;
 }
 
 .timetable-day {

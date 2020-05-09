@@ -1,0 +1,32 @@
+@import '_variables.scss';
+
+.courses-side-panel {
+  color: $color-grey-darker;
+  width: 20vw;
+  height: 100vh;
+  position: absolute;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+    background-color: $color-grey-lighter;
+    color: $color-grey-darker;
+    font-size: 16px;
+    padding: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    flex: 0 0 0;
+    user-select: none;
+  }
+
+  &__content {
+    background-color: $color-grey-lightest;
+    flex: 1 1 0;
+    padding: 8px;
+    text-align: left;
+    font-size: 16px;
+  }
+}

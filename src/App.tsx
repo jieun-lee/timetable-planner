@@ -2,7 +2,7 @@ import React from 'react';
 import { ICourse } from './util/DataTypes';
 import { getNextMockCourse } from './util/CourseManager';
 import Timetable from './components/Timetable';
-import CourseList from './components/CourseList';
+import CoursesSidePanel from './components/CoursesSidePanel';
 import './styles/App.scss';
 
 interface AppProps {}
@@ -42,8 +42,8 @@ class App extends React.Component<AppProps, AppState> {
     return (
       <div className="App">
           <Timetable courses={this.state.courses} />
-          <button onClick={this.handleClick}>Add</button>
-          <CourseList />
+          <button className="testing-button" onClick={this.handleClick}>Add</button>
+          <CoursesSidePanel />
       </div>
     );
   }
