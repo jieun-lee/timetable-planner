@@ -28,5 +28,30 @@
     padding: 8px;
     text-align: left;
     font-size: 16px;
+
+    &__toggle {
+      color: $color-grey-lightest;
+      display: flex;
+
+      &__button {
+        background-color: $color-grey-darker;
+        flex: 1 1 0;
+        text-align: center;
+        margin: 4px;
+        padding: 2px;
+        border-radius: 4px;
+        user-select: none;
+
+        &--deselected {
+          cursor: pointer;
+          background-color: $color-grey-dark;
+        }
+      }
+    }
+  }
+
+  &__sub-content {
+    font-size: 14px;
+    padding: 6px;
   }
 }
