@@ -3,6 +3,8 @@ import React from 'react';
 interface AddSectionProps {}
 
 interface AddSectionState {
+  course: string,
+  section: string,
   numMeetings: number
 }
 
@@ -10,9 +12,13 @@ class AddSection extends React.Component<AddSectionProps, AddSectionState> {
   constructor(props: AddSectionProps) {
     super(props);
     this.state = {
+      course: "",
+      section: "",
       numMeetings: 0 // gets reset on reload
     }
     this.addMeeting = this.addMeeting.bind(this);
+    this.handleCourseChange = this.handleCourseChange.bind(this);
+    this.handleSectionChange = this.handleSectionChange.bind(this);
   }
 
   renderTimePicker(type: "start" | "end", id: number): JSX.Element {
@@ -60,6 +66,8 @@ class AddSection extends React.Component<AddSectionProps, AddSectionState> {
 
   addMeeting(): void {
     this.setState((prevState: AddSectionState) => ({
+      course: prevState.course,
+      section: prevState.section,
       numMeetings: prevState.numMeetings + 1
     }));
   }
@@ -72,6 +80,24 @@ class AddSection extends React.Component<AddSectionProps, AddSectionState> {
     // switch to VIEW on the courses side panel
   }
 
+  handleCourseChange(event: React.ChangeEvent<HTMLInputElement>) {
+    let courseString: string = event.target.value;
+    this.setState((prevState: AddSectionState) => ({
+      course: courseString,
+      section: prevState.section,
+      numMeetings: prevState.numMeetings
+    }));
+  }
+
+  handleSectionChange(event: React.ChangeEvent<HTMLInputElement>) {
+    let sectionString: string = event.target.value;
+    this.setState((prevState: AddSectionState) => ({
+      course: prevState.course,
+      section: sectionString,
+      numMeetings: prevState.numMeetings
+    }));
+  }
+
   render() {
     let meetingFields: JSX.Element[] = [];
     for (let i = 0; i < this.state.numMeetings; i++) {
@@ -80,8 +106,8 @@ class AddSection extends React.Component<AddSectionProps, AddSectionState> {
 
     return (
       <div className="courses-side-panel__sub-content courses-add">
-        <input type="text" name="course-name" placeholder="Course Name" />
-        <input type="text" name="section-id" placeholder="Section ID" />
+        <input type="text" name="course-name" value={this.state.course} onChange={this.handleCourseChange} placeholder="Course Name" />
+        <input type="text" name="section-id" value={this.state.section} onChange={this.handleSectionChange} placeholder="Section ID" />
         { meetingFields }
         <button onClick={this.addMeeting}>Add Meeting Time</button>
         <button onClick={this.handleClick}>Add Section</button>
