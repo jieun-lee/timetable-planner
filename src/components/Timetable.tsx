@@ -13,11 +13,11 @@ class Timetable extends React.Component {
   render() {
     return (
       <div className="timetable">
-        <TimetableDay Day="Monday" />
-        <TimetableDay Day="Tuesday" />
-        <TimetableDay Day="Wednesday" />
-        <TimetableDay Day="Thursday" />
-        <TimetableDay Day="Friday" />
+        <TimetableDay day="Monday" />
+        <TimetableDay day="Tuesday" />
+        <TimetableDay day="Wednesday" />
+        <TimetableDay day="Thursday" />
+        <TimetableDay day="Friday" />
       </div>
     );
   }

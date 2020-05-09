@@ -13,16 +13,46 @@ $timetable-border-radius: 8px;
   flex: 1 1 0;
   border: 1px solid $color-grey-darker;
   border-radius: $timetable-border-radius;
+  display: flex;
+  flex-direction: column;
 
   &__header {
     border-top-left-radius: $timetable-border-radius;
     border-top-right-radius: $timetable-border-radius;
-    background-color: $color-grey-lighter;
+    background-color: $color-grey-light;
     font-size: 14px;
     padding: 6px 4px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1.5px;
     color: $color-grey-darker;
+    border-bottom: 1px solid $color-grey-lightest;
+  }
+
+  &__schedule {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    height: 100%;
+  }
+}
+
+.time-segment {
+  background-color: $color-grey-lighter;
+  font-size: 12px;
+  padding: 4px;
+  font-weight: 400;
+  color: $color-grey-darker;
+  flex: 1 1 0;
+  border-bottom: 0.5px dashed $color-grey-lightest;
+
+  &--half {
+    border-bottom: 1.5px solid $color-grey-lightest;
+  }
+
+  &:last-child {
+    border-bottom-left-radius: $timetable-border-radius;
+    border-bottom-right-radius: $timetable-border-radius;
+    border-bottom: 0px;
   }
 }
