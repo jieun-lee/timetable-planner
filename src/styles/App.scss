@@ -1,8 +1,8 @@
-$bg-color: #282c34;
+@import '_variables.scss';
 
 .App {
   text-align: center;
-  background-color: $bg-color;
+  background-color: $color-grey-darker;
   min-height: 100vh;
   display: flex;
   flex-direction: column;

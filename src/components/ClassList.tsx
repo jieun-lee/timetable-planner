@@ -4,11 +4,7 @@ import '../styles/ClassList.scss';
 function ClassList() {
   return (
     <div className="class-list">
-      <header>
-        <p>
-          Class List
-        </p>
-      </header>
+      Class List
     </div>
   );
 }

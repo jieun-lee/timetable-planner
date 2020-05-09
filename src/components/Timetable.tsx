@@ -1,16 +1,26 @@
 import React from 'react';
+import TimetableDay from './TimetableDay';
 import '../styles/Timetable.scss';
 
-function Timetable() {
-  return (
-    <div className="timetable">
-      <header>
-        <p>
-          Timetable
-        </p>
-      </header>
-    </div>
-  );
+class Timetable extends React.Component {
+  constructor(props: object) {
+    super(props);
+    this.state = {
+      classes: null
+    }
+  }
+
+  render() {
+    return (
+      <div className="timetable">
+        <TimetableDay Day="Monday" />
+        <TimetableDay Day="Tuesday" />
+        <TimetableDay Day="Wednesday" />
+        <TimetableDay Day="Thursday" />
+        <TimetableDay Day="Friday" />
+      </div>
+    );
+  }
 }
 
 export default Timetable;

@@ -1,5 +1,28 @@
 @import '_variables.scss';
 
+$timetable-border-radius: 8px;
+
 .timetable {
-  color: $test-color;
+  width: 70vw;
+  height: 70vh;
+  display: flex;
+}
+
+.timetable-day {
+  background-color: $color-grey-lightest;
+  flex: 1 1 0;
+  border: 1px solid $color-grey-darker;
+  border-radius: $timetable-border-radius;
+
+  &__header {
+    border-top-left-radius: $timetable-border-radius;
+    border-top-right-radius: $timetable-border-radius;
+    background-color: $color-grey-lighter;
+    font-size: 14px;
+    padding: 6px 4px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: $color-grey-darker;
+  }
 }
