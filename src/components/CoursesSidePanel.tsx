@@ -1,7 +1,7 @@
 import React from 'react';
 import { ICourse } from '../util/DataTypes';
 import CoursesView from './CoursesView';
-import CoursesAdd from './CoursesAdd';
+import AddSection from './AddSection';
 import '../styles/CoursesSidePanel.scss';
 
 interface CoursesSidePanelProps {
@@ -50,7 +50,7 @@ class CoursesSidePanel extends React.Component<CoursesSidePanelProps, CoursesSid
         className="courses-side-panel__content__toggle__button
           courses-side-panel__content__toggle__button--deselected">Add</div>
     } else {
-      content = <CoursesAdd />;
+      content = <AddSection />;
       addButton = <div className="courses-side-panel__content__toggle__button">Add</div>
       viewButton = <div
         onClick={this.toggleContent}
