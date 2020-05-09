@@ -2,12 +2,14 @@
 
 .courses-side-panel {
   color: $color-grey-darker;
+  min-width: 200px;
   width: 20vw;
   height: 100vh;
   position: absolute;
   right: 0;
   display: flex;
   flex-direction: column;
+  overflow: scroll;
 
   &__header {
     background-color: $color-grey-lighter;
@@ -53,5 +55,60 @@
   &__sub-content {
     font-size: 14px;
     padding: 6px;
+  }
+}
+
+.courses-view {
+  &__course {
+    margin-bottom: 16px;
+
+    &__name {
+      font-size: 16px;
+      font-weight: 600;
+      margin: 4px 0;
+      letter-spacing: 1.5px;
+      text-align: center;
+    }
+
+    &__section {
+      // wrapper
+      border: 1px solid black;
+      padding: 8px 10px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+
+      &:last-child {
+        margin-bottom: 24px;
+      }
+
+      &__label {
+        // header
+        margin: 0;
+        margin-bottom: 4px;
+        font-weight: 600;
+      }
+
+      &__time {
+        display: inline-block;
+        color: $color-grey-dark;
+
+        &__day {
+          // day text
+          text-transform: uppercase;
+          width: 40px;
+          font-size: 13px;
+          font-weight: 600;
+          // margin-right: 16px; // make it even
+          display: inline-block;
+          // margin-right: 6px;
+          text-align: left;
+        }
+
+        &__time {
+          // time text
+          display: inline-block;
+        }
+      }
+    }
   }
 }

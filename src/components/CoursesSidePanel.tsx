@@ -1,10 +1,11 @@
 import React from 'react';
+import { ICourse } from '../util/DataTypes';
 import CoursesView from './CoursesView';
 import CoursesAdd from './CoursesAdd';
 import '../styles/CoursesSidePanel.scss';
 
 interface CoursesSidePanelProps {
-  //
+  courses: ICourse[]
 }
 
 interface CoursesSidePanelState {
@@ -42,7 +43,7 @@ class CoursesSidePanel extends React.Component<CoursesSidePanelProps, CoursesSid
     let viewButton: JSX.Element;
     let addButton: JSX.Element;
     if (this.state.isViewSelected) {
-      content = <CoursesView />;
+      content = <CoursesView courses={this.props.courses} />;
       viewButton = <div className="courses-side-panel__content__toggle__button">View</div>
       addButton = <div
         onClick={this.toggleContent}

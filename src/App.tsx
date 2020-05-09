@@ -43,7 +43,7 @@ class App extends React.Component<AppProps, AppState> {
       <div className="App">
           <Timetable courses={this.state.courses} />
           <button className="testing-button" onClick={this.handleClick}>Add</button>
-          <CoursesSidePanel />
+          <CoursesSidePanel courses={this.state.courses} />
       </div>
     );
   }

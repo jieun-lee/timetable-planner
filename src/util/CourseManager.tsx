@@ -40,6 +40,17 @@ let mockCourses: ICourse[] = [
         startTime: 11,
         duration: 1.5
       }]
+    }, {
+      id: "102",
+      times: [{
+        day: Day.Tuesday,
+        startTime: 14,
+        duration: 1.5
+      },{
+        day: Day.Thursday,
+        startTime: 14,
+        duration: 1.5
+      }]
     }]
   },
   {
