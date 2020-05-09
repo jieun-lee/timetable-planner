@@ -22,6 +22,7 @@ class App extends React.Component<AppProps, AppState> {
     this.handleClick = this.handleClick.bind(this);
   }
 
+  // for testing
   handleClick() {
     let course: ICourse = getNextMockCourse();
     this.addCourse(course);
@@ -35,13 +36,12 @@ class App extends React.Component<AppProps, AppState> {
       name: prevState.name,
       courses: courseList
     }));
-    console.log(this.state);
   }
 
   render() {
     return (
       <div className="App">
-          <Timetable />
+          <Timetable courses={this.state.courses} />
           <button onClick={this.handleClick}>Add</button>
           <CourseList />
       </div>

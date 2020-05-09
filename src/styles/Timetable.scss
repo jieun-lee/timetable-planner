@@ -46,8 +46,12 @@ $timetable-border-radius: 8px;
   flex: 1 1 0;
   border-bottom: 0.5px dashed $color-grey-lightest;
 
-  &--half {
+  &--half.time-segment--empty {
     border-bottom: 1.5px solid $color-grey-lightest;
+  }
+
+  &--deselected {
+    background-color: #7ede56;
   }
 
   &:last-child {
