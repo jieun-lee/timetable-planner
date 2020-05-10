@@ -1,12 +1,18 @@
 import React from 'react';
-import { ITime, Day } from '../util/DataTypes';
+import { ICourse, ITime, Day } from '../util/DataTypes';
 
-interface AddSectionProps {}
+interface AddSectionProps {
+  courses: ICourse[],
+  addCourse: Function,
+  addSection: Function,
+  togglePanel: Function
+}
 
 interface AddSectionState {
   course: string,
   section: string,
   times: ITime[],
+  message: string
 }
 
 class AddSection extends React.Component<AddSectionProps, AddSectionState> {
@@ -15,8 +21,10 @@ class AddSection extends React.Component<AddSectionProps, AddSectionState> {
     this.state = {
       course: "",
       section: "",
-      times: []
+      times: [],
+      message: ""
     }
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCourseChange = this.handleCourseChange.bind(this);
     this.handleSectionChange = this.handleSectionChange.bind(this);
     this.handleMeetingDayChange = this.handleMeetingDayChange.bind(this);
@@ -24,29 +32,69 @@ class AddSection extends React.Component<AddSectionProps, AddSectionState> {
     this.addMeeting = this.addMeeting.bind(this);
   }
 
+  updateMessage(msg: string) {
+    this.setState(() => ({
+      message: msg
+    }));
+  }
+
   handleSubmit() {
-    // CHECK - has at least one meeting time
-    // CHECK - for each meeting time, the end time > start time
-    // get existing course OR create new course object
-    // add section to the course
-    // switch to VIEW on the courses side panel
+    // check for blank input values
+    if (this.state.course === "") {
+      this.updateMessage("Please enter a course name.");
+      return;
+    } else if (this.state.section === "") {
+      this.updateMessage("Please enter a section ID.");
+      return;
+    }
+    // check start time < end time for all meeting times
+    for (let time of this.state.times) {
+      if (time.duration <= 0) {
+        this.updateMessage("Meeting end times must be later than meeting start times.");
+        return;
+      }
+    }
+    // check if course exists
+    for (let index in this.props.courses) {
+      if (this.props.courses[index].name === this.state.course) {
+        for (let section of this.props.courses[index].sections) {
+          if (section.id === this.state.section) {
+            this.updateMessage("Given section already exists for the given course.");
+            return;
+          }
+        }
+        // add section to existing course
+        this.props.addSection(index, {
+          id: this.state.section,
+          times: this.state.times
+        });
+        this.props.togglePanel();
+        return;
+      }
+    }
+    // create a new course and add it
+    let newCourse: ICourse = {
+      name: this.state.course,
+      sections: [{
+        id: this.state.section,
+        times: this.state.times
+      }]
+    };
+    this.props.addCourse(newCourse);
+    this.props.togglePanel();
   }
 
   handleCourseChange(event: React.ChangeEvent<HTMLInputElement>) {
     let courseString: string = event.target.value;
-    this.setState((prevState: AddSectionState) => ({
-      course: courseString,
-      section: prevState.section,
-      times: prevState.times,
+    this.setState(() => ({
+      course: courseString
     }));
   }
 
   handleSectionChange(event: React.ChangeEvent<HTMLInputElement>) {
     let sectionString: string = event.target.value;
-    this.setState((prevState: AddSectionState) => ({
-      course: prevState.course,
-      section: sectionString,
-      times: prevState.times,
+    this.setState(() => ({
+      section: sectionString
     }));
   }
 
@@ -54,10 +102,8 @@ class AddSection extends React.Component<AddSectionProps, AddSectionState> {
     let eventId: number = +event.target.id;
     let newTimes: ITime[] = this.state.times;
     newTimes[eventId].day = +event.target.value;
-    this.setState((prevState: AddSectionState) => ({
-      course: prevState.course,
-      section: prevState.section,
-      times: newTimes,
+    this.setState(() => ({
+      times: newTimes
     }));
   }
 
@@ -75,9 +121,7 @@ class AddSection extends React.Component<AddSectionProps, AddSectionState> {
     }
     newTimes[eventId].startTime = startTime;
     newTimes[eventId].duration = endTime - startTime;
-    this.setState((prevState: AddSectionState) => ({
-      course: prevState.course,
-      section: prevState.section,
+    this.setState(() => ({
       times: newTimes,
     }));
   }
@@ -100,9 +144,7 @@ class AddSection extends React.Component<AddSectionProps, AddSectionState> {
     }
     let newTimes: ITime[] = this.state.times;
     newTimes.push(newTime);
-    this.setState((prevState: AddSectionState) => ({
-      course: prevState.course,
-      section: prevState.section,
+    this.setState(() => ({
       times: newTimes,
     }));
   }
@@ -205,7 +247,8 @@ class AddSection extends React.Component<AddSectionProps, AddSectionState> {
           <button className="courses-add__button" onClick={this.addMeeting}>Add Meeting Time</button>
         </div>
         <div className="courses-add__submit">
-        <button className="courses-add__button" onClick={this.handleSubmit}>Add to Course List</button>
+          { this.state.message.length > 0 && <div className="courses-add__submit__error">{this.state.message}</div> }
+          <button className="courses-add__button" onClick={this.handleSubmit}>Add to Course List</button>
         </div>
       </div>
     );

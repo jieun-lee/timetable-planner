@@ -5,7 +5,9 @@ import AddSection from './AddSection';
 import '../styles/CoursesSidePanel.scss';
 
 interface CoursesSidePanelProps {
-  courses: ICourse[]
+  courses: ICourse[],
+  addCourse: Function,
+  addSection: Function
 }
 
 interface CoursesSidePanelState {
@@ -50,7 +52,12 @@ class CoursesSidePanel extends React.Component<CoursesSidePanelProps, CoursesSid
         className="courses-side-panel__content__toggle__button
           courses-side-panel__content__toggle__button--deselected">Add</div>
     } else {
-      content = <AddSection />;
+      content = <AddSection
+        courses={this.props.courses}
+        addCourse={this.props.addCourse}
+        addSection={this.props.addSection}
+        togglePanel={this.toggleContent}
+      />;
       addButton = <div className="courses-side-panel__content__toggle__button">Add</div>
       viewButton = <div
         onClick={this.toggleContent}

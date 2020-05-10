@@ -146,5 +146,12 @@
     text-align: center;
     margin-top: 24px;
     width: -webkit-fill-available;
+
+    &__error {
+      font-size: 12px;
+      font-weight: 500;
+      color: #ff0000;
+      margin-bottom: 4px;
+    }
   }
 }
