@@ -11,7 +11,6 @@ interface CoursesSidePanelProps {
 }
 
 interface CoursesSidePanelState {
-  showContent: boolean,
   isViewSelected: boolean
 }
 
@@ -19,23 +18,13 @@ class CoursesSidePanel extends React.Component<CoursesSidePanelProps, CoursesSid
   constructor(props: CoursesSidePanelProps) {
     super(props);
     this.state = {
-      showContent: false,
       isViewSelected: true
     }
-    this.toggleContentDisplay = this.toggleContentDisplay.bind(this);
     this.toggleContent = this.toggleContent.bind(this);
-  }
-
-  toggleContentDisplay(): void {
-    this.setState((prevState: CoursesSidePanelState) => ({
-      showContent: !prevState.showContent,
-      isViewSelected: prevState.isViewSelected
-    }));
   }
 
   toggleContent(): void {
     this.setState((prevState: CoursesSidePanelState) => ({
-      showContent: prevState.showContent,
       isViewSelected: !prevState.isViewSelected
     }));
   }
@@ -66,17 +55,14 @@ class CoursesSidePanel extends React.Component<CoursesSidePanelProps, CoursesSid
     }
     return (
       <div className="courses-side-panel">
-        <div className="courses-side-panel__header" onClick={this.toggleContentDisplay}>Manage Courses</div>
-        { this.state.showContent &&
-          <div className="courses-side-panel__content">
-            <div className="courses-side-panel__content__toggle">
-              { viewButton }
-              { addButton }
-            </div>
-            { content }
+        <div className="courses-side-panel__header">Courses</div>
+        <div className="courses-side-panel__content">
+          <div className="courses-side-panel__content__toggle">
+            { viewButton }
+            { addButton }
           </div>
-        }
-        
+          { content }
+        </div>
       </div>
     );
   }
