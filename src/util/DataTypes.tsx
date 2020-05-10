@@ -14,6 +14,7 @@ export enum Status {
 
 export interface ICourse {
   name: string,
+  isSelected: boolean,
   sections: ISection[]
 }
 
@@ -30,8 +31,8 @@ export interface ITime {
 }
 
 export interface ITimetableSection {
-  name: string,
-  section: string,
+  course: string,
+  id: string,
   startTime: number,
   duration: number,
   status: Status

@@ -16,9 +16,11 @@ class TimeSegment extends React.Component<TimeSegmentProps> {
 
   handleSectionClick(sectionId: string) {
     for (let section of this.props.sections) {
-      if (section.section === sectionId) {
-        let status: Status = section.status === Status.Deselected ? Status.Selected : Status.Deselected;
-        this.props.setSectionStatus(section.name, sectionId, status);
+      if (section.id === sectionId) {
+        if (section.status !== Status.Disabled) {
+          let status: Status = section.status === Status.Deselected ? Status.Selected : Status.Deselected;
+          this.props.setSectionStatus(section.course, sectionId, status);
+        }
         return;
       }
     }
@@ -43,8 +45,8 @@ class TimeSegment extends React.Component<TimeSegmentProps> {
               classList = classList + " time-segment__course--disabled";
               break;
           }
-          courseEls.push(<div className={classList} style={elStyle} key={index} onClick={()=>this.handleSectionClick(section.section)}>
-            <div className="time-segment__course__label">{ section.name + " " + section.section }</div>
+          courseEls.push(<div className={classList} style={elStyle} key={index} onClick={()=>this.handleSectionClick(section.id)}>
+            <div className="time-segment__course__label">{ section.course + " " + section.id }</div>
             <div className="time-segment__course__time">{ getTimeLabel(section.startTime, section.duration) }</div>
           </div>);
         }

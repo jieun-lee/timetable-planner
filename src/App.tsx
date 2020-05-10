@@ -50,17 +50,24 @@ class App extends React.Component<AppProps, AppState> {
   }
 
   setSectionStatus(courseName: string, sectionId: string, status: Status) {
+    // CASES TO HANDLE: enable/disable same course sections, overlapping sections
     for (let course of this.state.courses) {
       if (course.name === courseName) {
-        for (let section of course.sections) {
-          if (section.id === sectionId) {
-            section.status = status;
-            this.setState((prevState: AppState) => ({
-              courses: prevState.courses
-            }));
-            return;
-          }
+        // update "isSelected" for the course
+        let oppStatus: Status = Status.Deselected;
+        if (status === Status.Selected) {
+          course.isSelected = true;
+          oppStatus = Status.Disabled;
+        } else if (status === Status.Deselected) {
+          course.isSelected = false;
         }
+        for (let section of course.sections) {
+          section.status = (section.id === sectionId) ? status : oppStatus;
+        }
+        this.setState((prevState: AppState) => ({
+          courses: prevState.courses
+        }));
+        return;
       }
     }
   }

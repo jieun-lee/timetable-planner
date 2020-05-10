@@ -22,8 +22,8 @@ class Timetable extends React.Component<TimetableProps> {
       for (let section of course.sections) {
         for (let time of section.times) {
           let ttSection: ITimetableSection = {
-            name: course.name,
-            section: section.id,
+            course: course.name,
+            id: section.id,
             startTime: time.startTime,
             duration: time.duration,
             status: section.status

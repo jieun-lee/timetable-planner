@@ -10,6 +10,7 @@ let mockCourseCount: number = 0;
 let mockCourses: ICourse[] = [
   {
     name: "CPSC 110",
+    isSelected: false,
     sections: [{
       id: "103",
       status: Status.Deselected,
@@ -30,6 +31,7 @@ let mockCourses: ICourse[] = [
   },
   {
     name: "CPSC 121",
+    isSelected: false,
     sections: [{
       id: "101",
       status: Status.Deselected,
@@ -58,6 +60,7 @@ let mockCourses: ICourse[] = [
   },
   {
     name: "MATH 200",
+    isSelected: false,
     sections: [{
       id: "110B",
       status: Status.Deselected,

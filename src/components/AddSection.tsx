@@ -54,7 +54,7 @@ class AddSection extends React.Component<AddSectionProps, AddSectionState> {
         return;
       }
     }
-    // check if course exists
+    // check if course exists (need to implement case checking)
     for (let index in this.props.courses) {
       if (this.props.courses[index].name === this.state.course) {
         for (let section of this.props.courses[index].sections) {
@@ -66,7 +66,7 @@ class AddSection extends React.Component<AddSectionProps, AddSectionState> {
         // add section to existing course
         this.props.addSection(index, {
           id: this.state.section,
-          status: Status.Deselected,
+          status: this.props.courses[index].isSelected ? Status.Disabled : Status.Deselected,
           times: this.state.times
         });
         this.props.togglePanel();
@@ -76,6 +76,7 @@ class AddSection extends React.Component<AddSectionProps, AddSectionState> {
     // create a new course and add it
     let newCourse: ICourse = {
       name: this.state.course,
+      isSelected: false,
       sections: [{
         id: this.state.section,
         status: Status.Deselected,
