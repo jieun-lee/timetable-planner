@@ -76,6 +76,20 @@
         margin-bottom: 24px;
       }
 
+      &--Selected {
+        background-color: $color-status-selected-bg;
+        border-color: $color-status-selected;
+      }
+
+      &--Disabled {
+        color: $color-status-disabled-text;
+        border-color: $color-status-disabled-text;
+
+        & .courses-view__course__section__time {
+          color: $color-status-disabled-text;
+        }
+      }
+
       &__label {
         margin: 0;
         margin-bottom: 4px;

@@ -1,12 +1,6 @@
 @import '_variables.scss';
 
 $timetable-border-radius: 8px;
-$timetable-color-deselected: #94a0bd;
-$timetable-color-deselected-text: #1e2944;
-$timetable-color-selected: #7ad244;
-$timetable-color-selected-text: #131711;
-$timetable-color-disabled: #b8becc;
-$timetable-color-disabled-text: #8690a5;
 
 .timetable {
   width: 70vw;
@@ -60,20 +54,20 @@ $timetable-color-disabled-text: #8690a5;
 
   &__course {
     position: absolute;
-    background-color: $timetable-color-deselected;
+    background-color: $color-status-deselected;
     width: 100%;
     z-index: 1;
     left: 0;
     top: 0;
 
     &--selected {
-      background-color: $timetable-color-selected;
-      color: $timetable-color-selected-text;
+      background-color: $color-status-selected;
+      color: $color-status-selected-text;
     }
 
     &--disabled {
-      background-color: $timetable-color-disabled;
-      color: $timetable-color-disabled-text;
+      background-color: $color-status-disabled;
+      color: $color-status-disabled-text;
     }
 
     &__label {

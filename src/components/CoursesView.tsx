@@ -1,5 +1,5 @@
 import React from 'react';
-import { ICourse, ISection, ITime } from "../util/DataTypes";
+import { ICourse, ISection, ITime, Status } from "../util/DataTypes";
 import { getShortDayName, getTimeLabel } from "../util/util";
 
 interface CoursesViewProps {
@@ -23,7 +23,7 @@ class CoursesView extends React.Component<CoursesViewProps> {
       timeElements.push(this.renderSectionTime(time));
     }
     return (
-      <div className="courses-view__course__section" key={section.id}>
+      <div className={`courses-view__course__section courses-view__course__section--${Status[section.status]}`} key={section.id}>
         <p className="courses-view__course__section__label">{ course + " " + section.id }</p>
         { timeElements }
       </div>
@@ -36,7 +36,7 @@ class CoursesView extends React.Component<CoursesViewProps> {
       sectionElements.push(this.renderSection(course.name, section));
     }
     return (
-      <div className="courses-view__course" key={course.name}>
+      <div className="courses-view__course" key={ course.name }>
         <p className="courses-view__course__name">{ course.name }</p>
         { sectionElements }
       </div>
