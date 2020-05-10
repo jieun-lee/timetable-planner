@@ -4,7 +4,8 @@ import TimetableDay from './TimetableDay';
 import '../styles/Timetable.scss';
 
 interface TimetableProps {
-  courses: ICourse[]
+  courses: ICourse[],
+  setSectionStatus: Function
 }
 
 class Timetable extends React.Component<TimetableProps> {
@@ -54,11 +55,11 @@ class Timetable extends React.Component<TimetableProps> {
     let sections: ISectionsByDay = this.getSectionsByDay(this.props.courses);
     return (
       <div className="timetable">
-        <TimetableDay day="Monday" sections={sections.monday} />
-        <TimetableDay day="Tuesday" sections={sections.tuesday} />
-        <TimetableDay day="Wednesday" sections={sections.wednesday} />
-        <TimetableDay day="Thursday" sections={sections.thursday} />
-        <TimetableDay day="Friday" sections={sections.friday} />
+        <TimetableDay day="Monday" sections={sections.monday} setSectionStatus={this.props.setSectionStatus} />
+        <TimetableDay day="Tuesday" sections={sections.tuesday} setSectionStatus={this.props.setSectionStatus} />
+        <TimetableDay day="Wednesday" sections={sections.wednesday} setSectionStatus={this.props.setSectionStatus} />
+        <TimetableDay day="Thursday" sections={sections.thursday} setSectionStatus={this.props.setSectionStatus} />
+        <TimetableDay day="Friday" sections={sections.friday} setSectionStatus={this.props.setSectionStatus} />
       </div>
     );
   }

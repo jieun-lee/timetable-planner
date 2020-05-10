@@ -4,7 +4,8 @@ import { ITimetableSection, ITimeSegment } from '../util/DataTypes';
 
 interface TimetableDayProps {
   day: string
-  sections: ITimetableSection[]
+  sections: ITimetableSection[],
+  setSectionStatus: Function
   // StartTime: number
   // EndTime: number
 }
@@ -63,6 +64,7 @@ class TimetableDay extends React.Component<TimetableDayProps, TimetableDayState>
           key={segment.startTime}
           startTime={segment.startTime}
           sections={segment.sections}
+          setSectionStatus={this.props.setSectionStatus}
         />
       );
     }

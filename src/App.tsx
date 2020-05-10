@@ -1,5 +1,5 @@
 import React from 'react';
-import { ICourse, ISection } from './util/DataTypes';
+import { ICourse, ISection, Status } from './util/DataTypes';
 import { getNextMockCourse } from './util/CourseManager';
 import Timetable from './components/Timetable';
 import CoursesSidePanel from './components/CoursesSidePanel';
@@ -22,6 +22,7 @@ class App extends React.Component<AppProps, AppState> {
     this.handleClick = this.handleClick.bind(this);
     this.addCourse = this.addCourse.bind(this);
     this.addSectionToCourse = this.addSectionToCourse.bind(this);
+    this.setSectionStatus = this.setSectionStatus.bind(this);
   }
 
   // for testing
@@ -48,10 +49,26 @@ class App extends React.Component<AppProps, AppState> {
     }));
   }
 
+  setSectionStatus(courseName: string, sectionId: string, status: Status) {
+    for (let course of this.state.courses) {
+      if (course.name === courseName) {
+        for (let section of course.sections) {
+          if (section.id === sectionId) {
+            section.status = status;
+            this.setState((prevState: AppState) => ({
+              courses: prevState.courses
+            }));
+            return;
+          }
+        }
+      }
+    }
+  }
+
   render() {
     return (
       <div className="App">
-          <Timetable courses={this.state.courses} />
+          <Timetable courses={this.state.courses} setSectionStatus={this.setSectionStatus} />
           <button className="testing-button" onClick={this.handleClick}>Add</button>
           <CoursesSidePanel courses={this.state.courses} addCourse={this.addCourse} addSection={this.addSectionToCourse} />
       </div>
