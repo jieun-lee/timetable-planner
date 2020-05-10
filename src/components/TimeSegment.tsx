@@ -1,38 +1,52 @@
 import React from 'react';
-import { ITimeSegment } from '../util/DataTypes';
+import { ITimeSegment, Status } from '../util/DataTypes';
+import { getTimeLabel } from '../util/util';
 
-function TimeSegment(props: ITimeSegment) {
-  let classList: string = "time-segment";
-  let isContinued: boolean = false; // handle this properly
-  let title: string = "";
-  // let status: Status = Status.Undefined;
-  if (props.sections.length > 0) {
-    // handle sections - just do first one for now
-    if (props.sections[0].startTime < props.startTime) {
-      isContinued = true;
+class TimeSegment extends React.Component<ITimeSegment> {
+  // CURRENT ASSUMPTIONS:
+  // - no overlaps (this.props.sections.length <= 1)
+  // - only render courses that start at this time segment
+  render() {
+    let courseEls: JSX.Element[]  = [];
+    if (this.props.sections.length > 0) {
+      for (let index in this.props.sections) {
+        if (this.props.sections[index].startTime === this.props.startTime) {
+          let section = this.props.sections[index];
+          let elStyle: object = { height: ((section.duration / 0.5) * 100) + "%" };
+          let classList = "time-segment__course";
+          switch(section.status) {
+            case Status.Selected:
+              classList = classList + " time-segment__course--selected";
+              break;
+            case Status.Disabled:
+              classList = classList + " time-segment__course--disabled";
+              break;
+          }
+          courseEls.push(<div className={classList} style={elStyle} key={index}>
+            <div className="time-segment__course__label">{ section.name + " " + section.section }</div>
+            <div className="time-segment__course__time">{ getTimeLabel(section.startTime, section.duration) }</div>
+          </div>);
+        }
+      }      
+    }
+    // setup for background timetable
+    let classList: string = "time-segment";
+    let timeLabel: string = "";
+    if (Math.floor(this.props.startTime) < this.props.startTime) {
+      classList = classList + " time-segment--mid-hour";
     } else {
-      title = props.sections[0].name + " " + props.sections[0].section;
-      // status = props.sections[0].status;
+      timeLabel = this.props.startTime + ":00";
     }
-    classList = classList + " time-segment--deselected";
-  } else {
-    isContinued = Math.floor(props.startTime) < props.startTime;
-    if (!isContinued) {
-      title = props.startTime + ":00";
-    }
-    classList = classList + " time-segment--empty";
+    // render components
+    return (
+      <div className={classList}>
+        { courseEls }
+        <span>
+          { timeLabel }
+        </span>
+      </div>
+    )
   }
-  if (isContinued) {
-    classList = classList + " time-segment--half"; // need to change
-  }
-
-  return (
-    <div className={classList}>
-      <span>
-        { title }
-      </span>
-    </div>
-  )
 }
 
 export default TimeSegment;

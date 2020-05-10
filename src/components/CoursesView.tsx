@@ -1,6 +1,6 @@
 import React from 'react';
 import { ICourse, ISection, ITime } from "../util/DataTypes";
-import { getShortDayName } from "../util/util";
+import { getShortDayName, getTimeLabel } from "../util/util";
 
 interface CoursesViewProps {
   courses: ICourse[]
@@ -9,19 +9,10 @@ interface CoursesViewProps {
 class CoursesView extends React.Component<CoursesViewProps> {
 
   renderSectionTime(time: ITime): JSX.Element {
-    let timeStr: string =
-      (Math.floor(time.startTime) === time.startTime) ?
-        time.startTime + ":00" :
-        Math.floor(time.startTime) + ":30";
-    let endTime: number = time.startTime + time.duration;
-    timeStr+=
-      (Math.floor(endTime) === endTime) ?
-        " - " + endTime + ":00"
-        : " - " + Math.floor(endTime) + ":30";
     return (
       <div className="courses-view__course__section__time" key={time.day.toString()+time.startTime}>
         <div className="courses-view__course__section__time__day">{ getShortDayName(time.day) }</div>
-        <div className="courses-view__course__section__time__time">{ timeStr }</div>
+        <div className="courses-view__course__section__time__time">{ getTimeLabel(time.startTime, time.duration) }</div>
       </div>
     );
   }

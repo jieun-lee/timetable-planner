@@ -9,8 +9,7 @@ export enum Day {
 export enum Status {
   Selected,
   Deselected,
-  Disabled,
-  Undefined
+  Disabled
 }
 
 export interface ICourse {

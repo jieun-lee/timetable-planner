@@ -1,6 +1,9 @@
 @import '_variables.scss';
 
 $timetable-border-radius: 8px;
+$timetable-color-selected: #7ad244;
+$timetable-color-deselected: #94a0bd;
+$timetable-color-disabled: #b6c0d8;
 
 .timetable {
   width: 70vw;
@@ -46,13 +49,37 @@ $timetable-border-radius: 8px;
   color: $color-grey-darker;
   flex: 1 1 0;
   border-bottom: 0.5px dashed $color-grey-lightest;
+  position: relative;
 
-  &--half.time-segment--empty {
+  &--mid-hour {
     border-bottom: 1.5px solid $color-grey-lightest;
   }
 
-  &--deselected {
-    background-color: #7ede56;
+  &__course {
+    position: absolute;
+    background-color: $timetable-color-deselected;
+    width: 100%;
+    z-index: 1;
+    left: 0;
+    top: 0;
+
+    &--selected {
+      background-color: $timetable-color-selected;
+    }
+
+    &--disabled {
+      background-color: $timetable-color-disabled;
+    }
+
+    &__label {
+      font-weight: 700;
+      padding-top: 4px;
+      padding-bottom: 2px;
+    }
+
+    &__time {
+      font-weight: 500;
+    }
   }
 
   &:last-child {
