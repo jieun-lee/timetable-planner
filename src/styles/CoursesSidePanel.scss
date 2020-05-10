@@ -71,7 +71,6 @@
     }
 
     &__section {
-      // wrapper
       border: 1px solid black;
       padding: 8px 10px;
       border-radius: 4px;
@@ -82,7 +81,6 @@
       }
 
       &__label {
-        // header
         margin: 0;
         margin-bottom: 4px;
         font-weight: 600;
@@ -93,22 +91,60 @@
         color: $color-grey-dark;
 
         &__day {
-          // day text
           text-transform: uppercase;
           width: 40px;
           font-size: 13px;
           font-weight: 600;
-          // margin-right: 16px; // make it even
           display: inline-block;
-          // margin-right: 6px;
           text-align: left;
         }
 
         &__time {
-          // time text
           display: inline-block;
         }
       }
     }
+  }
+}
+
+.courses-add {
+  margin-top: 8px;
+  &__input {
+    font-size: 14px;
+    margin: 1px 0;
+    width: -webkit-fill-available;
+  }
+
+  &__meeting-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 16px;
+  }
+
+  &__meeting-time {
+    // margin: 14px 0;
+    margin-bottom: 16px;
+
+    &__label {
+      font-size: 12px;
+      text-transform: uppercase;
+      color: $color-grey-darker;
+      font-weight: 500;
+      letter-spacing: 1px;
+      width: 50px;
+      text-align: left;
+      display: inline-block;
+    }
+  }
+
+  &__button {
+    font-size: 12px;
+  }
+
+  &__submit {
+    text-align: center;
+    margin-top: 24px;
+    width: -webkit-fill-available;
   }
 }

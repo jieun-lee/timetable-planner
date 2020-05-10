@@ -24,7 +24,7 @@ class AddSection extends React.Component<AddSectionProps, AddSectionState> {
     this.addMeeting = this.addMeeting.bind(this);
   }
 
-  handleClick() {
+  handleSubmit() {
     // CHECK - has at least one meeting time
     // CHECK - for each meeting time, the end time > start time
     // get existing course OR create new course object
@@ -83,10 +83,20 @@ class AddSection extends React.Component<AddSectionProps, AddSectionState> {
   }
 
   addMeeting(): void {
-    let newTime: ITime = {
-      day: Day.Monday,
-      startTime: 8,
-      duration: 1
+    let newTime: ITime;
+    if (this.state.times.length > 0) {
+      let lastIndex: number = this.state.times.length - 1;
+      newTime = {
+        day: this.state.times[lastIndex].day,
+        startTime: this.state.times[lastIndex].startTime,
+        duration: this.state.times[lastIndex].duration
+      }
+    } else {
+      newTime = {
+        day: Day.Monday,
+        startTime: 8,
+        duration: 1
+      }
     }
     let newTimes: ITime[] = this.state.times;
     newTimes.push(newTime);
@@ -105,6 +115,7 @@ class AddSection extends React.Component<AddSectionProps, AddSectionState> {
     let pickerMin: number = pickerTime - pickerHr;
     return (
       <div>
+        <label className="courses-add__meeting-time__label">{ type }</label>
         <select
           id={id.toString()}
           value={pickerHr}
@@ -139,18 +150,21 @@ class AddSection extends React.Component<AddSectionProps, AddSectionState> {
 
   renderMeetingPicker(id: number): JSX.Element {
     return (
-      <div key={id}>
-        <select
-          id={id.toString()}
-          value={this.state.times[id].day}
-          onChange={this.handleMeetingDayChange}
-        >
-          <option value={0}>Monday</option>
-          <option value={1}>Tuesday</option>
-          <option value={2}>Wednesday</option>
-          <option value={3}>Thursday</option>
-          <option value={4}>Friday</option>
-        </select>
+      <div key={id} className="courses-add__meeting-time">
+        <div>
+          <label className="courses-add__meeting-time__label">Day</label>
+          <select
+            id={id.toString()}
+            value={this.state.times[id].day}
+            onChange={this.handleMeetingDayChange}
+          >
+            <option value={0}>Monday</option>
+            <option value={1}>Tuesday</option>
+            <option value={2}>Wednesday</option>
+            <option value={3}>Thursday</option>
+            <option value={4}>Friday</option>
+          </select>
+        </div>
         { this.renderTimePicker("start", id) }
         { this.renderTimePicker("end", id) }
     </div>
@@ -170,11 +184,29 @@ class AddSection extends React.Component<AddSectionProps, AddSectionState> {
 
     return (
       <div className="courses-side-panel__sub-content courses-add">
-        <input type="text" name="course-name" value={this.state.course} onChange={this.handleCourseChange} placeholder="Course Name" />
-        <input type="text" name="section-id" value={this.state.section} onChange={this.handleSectionChange} placeholder="Section ID" />
-        { meetingFields }
-        <button onClick={this.addMeeting}>Add Meeting Time</button>
-        <button onClick={this.handleClick}>Add Section</button>
+        <input
+          type="text"
+          name="course-name"
+          value={this.state.course}
+          onChange={this.handleCourseChange}
+          placeholder="Course Name"
+          className="courses-add__input"
+        />
+        <input
+          type="text"
+          name="section-id"
+          value={this.state.section}
+          onChange={this.handleSectionChange}
+          placeholder="Section ID"
+          className="courses-add__input"
+        />
+        <div className="courses-add__meeting-wrapper">
+          { meetingFields }
+          <button className="courses-add__button" onClick={this.addMeeting}>Add Meeting Time</button>
+        </div>
+        <div className="courses-add__submit">
+        <button className="courses-add__button" onClick={this.handleSubmit}>Add to Course List</button>
+        </div>
       </div>
     );
   }
