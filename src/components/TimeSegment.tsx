@@ -1,8 +1,22 @@
 import React from 'react';
-import { ITimeSegment, Status } from '../util/DataTypes';
+import { ITimetableSection, Status } from '../util/DataTypes';
 import { getTimeLabel } from '../util/util';
 
-class TimeSegment extends React.Component<ITimeSegment> {
+interface TimeSegmentProps {
+  startTime: number,
+  sections: ITimetableSection[],
+  // toggleCourseStatus: Function
+}
+
+class TimeSegment extends React.Component<TimeSegmentProps> {
+  constructor(props: TimeSegmentProps) {
+    super(props);
+    this.handleCourseClick = this.handleCourseClick.bind(this);
+  }
+
+  handleCourseClick() {
+    console.log('hello');
+  }
   // CURRENT ASSUMPTIONS:
   // - no overlaps (this.props.sections.length <= 1)
   // - only render courses that start at this time segment
@@ -22,7 +36,7 @@ class TimeSegment extends React.Component<ITimeSegment> {
               classList = classList + " time-segment__course--disabled";
               break;
           }
-          courseEls.push(<div className={classList} style={elStyle} key={index}>
+          courseEls.push(<div className={classList} style={elStyle} key={index} onClick={this.handleCourseClick}>
             <div className="time-segment__course__label">{ section.name + " " + section.section }</div>
             <div className="time-segment__course__time">{ getTimeLabel(section.startTime, section.duration) }</div>
           </div>);

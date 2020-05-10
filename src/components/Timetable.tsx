@@ -1,5 +1,5 @@
 import React from 'react';
-import { ICourse, ITimetableSection, ISectionsByDay, Day, Status } from '../util/DataTypes';
+import { ICourse, ITimetableSection, ISectionsByDay, Day } from '../util/DataTypes';
 import TimetableDay from './TimetableDay';
 import '../styles/Timetable.scss';
 
@@ -25,7 +25,7 @@ class Timetable extends React.Component<TimetableProps> {
             section: section.id,
             startTime: time.startTime,
             duration: time.duration,
-            status: Status.Deselected
+            status: section.status
           }
           switch (time.day) {
             case Day.Monday:

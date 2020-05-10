@@ -19,6 +19,7 @@ export interface ICourse {
 
 export interface ISection {
   id: string,
+  status: Status,
   times: ITime[]
 }
 

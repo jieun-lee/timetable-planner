@@ -1,5 +1,5 @@
 import React from 'react';
-import { ICourse, ITime, Day } from '../util/DataTypes';
+import { ICourse, ITime, Day, Status } from '../util/DataTypes';
 
 interface AddSectionProps {
   courses: ICourse[],
@@ -66,6 +66,7 @@ class AddSection extends React.Component<AddSectionProps, AddSectionState> {
         // add section to existing course
         this.props.addSection(index, {
           id: this.state.section,
+          status: Status.Deselected,
           times: this.state.times
         });
         this.props.togglePanel();
@@ -77,6 +78,7 @@ class AddSection extends React.Component<AddSectionProps, AddSectionState> {
       name: this.state.course,
       sections: [{
         id: this.state.section,
+        status: Status.Deselected,
         times: this.state.times
       }]
     };

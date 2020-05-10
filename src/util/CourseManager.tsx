@@ -1,4 +1,4 @@
-import { Day, ICourse } from './DataTypes';
+import { Day, Status, ICourse } from './DataTypes';
 
 export function getNextMockCourse() {
   let mockCourseId: number = mockCourseCount % mockCourses.length;
@@ -12,6 +12,7 @@ let mockCourses: ICourse[] = [
     name: "CPSC 110",
     sections: [{
       id: "103",
+      status: Status.Deselected,
       times: [{
         day: Day.Monday,
         startTime: 10,
@@ -31,6 +32,7 @@ let mockCourses: ICourse[] = [
     name: "CPSC 121",
     sections: [{
       id: "101",
+      status: Status.Deselected,
       times: [{
         day: Day.Tuesday,
         startTime: 11,
@@ -42,6 +44,7 @@ let mockCourses: ICourse[] = [
       }]
     }, {
       id: "102",
+      status: Status.Deselected,
       times: [{
         day: Day.Tuesday,
         startTime: 14,
@@ -57,6 +60,7 @@ let mockCourses: ICourse[] = [
     name: "MATH 200",
     sections: [{
       id: "110B",
+      status: Status.Deselected,
       times: [{
         day: Day.Monday,
         startTime: 13,

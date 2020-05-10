@@ -1,9 +1,12 @@
 @import '_variables.scss';
 
 $timetable-border-radius: 8px;
-$timetable-color-selected: #7ad244;
 $timetable-color-deselected: #94a0bd;
-$timetable-color-disabled: #b6c0d8;
+$timetable-color-deselected-text: #1e2944;
+$timetable-color-selected: #7ad244;
+$timetable-color-selected-text: #131711;
+$timetable-color-disabled: #b8becc;
+$timetable-color-disabled-text: #8690a5;
 
 .timetable {
   width: 70vw;
@@ -65,10 +68,12 @@ $timetable-color-disabled: #b6c0d8;
 
     &--selected {
       background-color: $timetable-color-selected;
+      color: $timetable-color-selected-text;
     }
 
     &--disabled {
       background-color: $timetable-color-disabled;
+      color: $timetable-color-disabled-text;
     }
 
     &__label {
